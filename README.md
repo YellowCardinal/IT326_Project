@@ -18,6 +18,9 @@ Download from: https://adoptium.net/temurin/releases
 
 4. press ctrl c in terminal to stop hosting.
 
+To get new changes:
+git pull origin main
+
 To push changes:
 git add .
 git commit -m "commit message"
