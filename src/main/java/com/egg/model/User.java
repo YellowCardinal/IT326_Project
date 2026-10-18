@@ -1,5 +1,4 @@
 package com.egg.model;
-
 public abstract class User {
     private String email;
     private String password;
