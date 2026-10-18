@@ -1,7 +1,7 @@
 package com.egg.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-@Document(collection = "users")
+@Document(collection = "students")
 public class Student extends User {
     @Id
     private String studentId;
