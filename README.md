@@ -30,7 +30,5 @@ To make a branch:
 git switch -c branch-name (This creates the branch)
 git branch (This shows the current branches)
 git switch branch-name (Switches to a branch)
------- 
 For branches, use "git push origin branch-name" to push to your branch.
 Don't use git push origin main
-------
