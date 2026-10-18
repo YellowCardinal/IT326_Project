@@ -30,5 +30,13 @@ To make a branch:
 git switch -c branch-name (This creates the branch)
 git branch (This shows the current branches)
 git switch branch-name (Switches to a branch)
+
 For branches, use "git push origin branch-name" to push to your branch.
 Don't use git push origin main
+
+After you pushed your branch to github servers(origin), go onto github's website and open the repository
+Click "Pull Requests"
+Click green "New Pull Request" button.
+Select it so it's "main <- branch-name" 
+(You are merging your branch into main)
+Click "Create Pull Request"
