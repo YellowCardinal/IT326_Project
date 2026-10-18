@@ -40,3 +40,4 @@ Click green "New Pull Request" button.
 Select it so it's "main <- branch-name" 
 (You are merging your branch into main)
 Click "Create Pull Request"
+Click green "Merge Pull Request" button.
