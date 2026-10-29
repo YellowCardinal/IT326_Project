@@ -18,6 +18,13 @@ Download from: https://adoptium.net/temurin/releases
 
 4. press ctrl c in terminal to stop hosting.
 
+MongoDB connection:
+
+- Put the connection URI in the project root `.env` file as `MONGODB_URI=...`. The app loads this file when it starts.
+- The default `.env` connects to `mongodb://localhost:27017/it326_group_project`; start a local MongoDB server to use it.
+- For MongoDB Atlas, replace the value in `.env` with your Atlas connection URI. Keep `.env` private; it is excluded from Git. A shareable template is in `.env.example`.
+- `StudentRepository` provides standard MongoDB CRUD operations and `findByIsuEmail` for looking up a student by their ISU email.
+
 To get new changes:
 git pull origin main
 
