@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reggie Books</title>
+  <style>
+    main { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Reggie Books</h1>
+    <p><a id="student-login-link" href="/student-login"><button type="button">Student Login</button></a></p>
+    <p><a id="admin-login-link" href="/admin-login"><button type="button">Admin Login</button></a></p>
+    <button id="logout-button" type="button" hidden>Logout</button>
+    <p id="welcome">Welcome</p>
+  </main>
+  <script>
+    const welcome = document.getElementById('welcome');
+    const studentLoginLink = document.getElementById('student-login-link');
+    const adminLoginLink = document.getElementById('admin-login-link');
+    const logoutButton = document.getElementById('logout-button');
+
+    async function loadStudent() {
+      const response = await fetch('/api/me');
+      if (!response.ok) {
+        welcome.textContent = 'Welcome';
+        return;
+      }
+
+      const student = await response.json();
+      welcome.textContent = `Welcome, ${student.firstName} ${student.lastName}`;
+      studentLoginLink.hidden = true;
+      adminLoginLink.hidden = true;
+      logoutButton.hidden = false;
+    }
+
+    logoutButton.addEventListener('click', async () => {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.assign('/');
+    });
+
+    loadStudent();
+  </script>
+</body>
+</html>

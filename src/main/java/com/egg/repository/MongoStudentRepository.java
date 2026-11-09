@@ -4,6 +4,7 @@ import com.egg.model.Student;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import com.mongodb.client.result.DeleteResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +32,28 @@ public class MongoStudentRepository implements StudentRepository {
     }
 
     @Override
+    public Optional<Student> findByEmail(String email) {
+        return mongoTemplate.query(Student.class)
+                .matching(Query.query(where("email").is(email)))
+                .one();
+    }
+
+    @Override
     public List<Student> findAll() {
         return mongoTemplate.findAll(Student.class);
     }
 
     @Override
-    public void deleteById(String id) {
-        mongoTemplate.remove(new Query(where("_id").is(id)), Student.class);
+    public long deleteById(String id) {
+        DeleteResult result = mongoTemplate.remove(
+                new Query(where("studentId").is(id)), Student.class);
+        return result.getDeletedCount();
+    }
+
+    @Override
+    public long deleteByEmail(String email) {
+        DeleteResult result = mongoTemplate.remove(
+                new Query(where("email").is(email)), Student.class);
+        return result.getDeletedCount();
     }
 }

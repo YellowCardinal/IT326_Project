@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Login</title>
+  <style>
+    main { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Student Login</h1>
+    <form id="login-form">
+      <p><label for="username">Username</label><br><input id="username" name="username" type="text" autocomplete="username" required></p>
+      <p><label for="password">Password</label><br><input id="password" name="password" type="password" autocomplete="current-password" required></p>
+      <button type="submit">Login</button>
+    </form>
+    <p id="response" role="status" aria-live="polite"></p>
+    <p><a href="/admin-login">Admin Login</a></p>
+  </main>
+  <script>
+    const form = document.getElementById('login-form');
+    const response = document.getElementById('response');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      response.textContent = 'Checking login...';
+
+      try {
+        const loginResponse = await fetch('/api/student/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: form.elements.username.value,
+            password: form.elements.password.value
+          })
+        });
+        const result = await loginResponse.json();
+        response.textContent = result.message;
+
+        if (loginResponse.ok) {
+          setTimeout(() => window.location.assign('/student-home'), 500);
+        }
+      } catch (error) {
+        response.textContent = 'Could not contact the server. Try again.';
+      }
+    });
+  </script>
+</body>
+</html>
