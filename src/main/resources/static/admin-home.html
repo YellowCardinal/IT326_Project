@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Home</title>
+</head>
+<body>
+  <h1>Admin Home</h1>
+  <p id="welcome">Loading account...</p>
+  <p><button type="button">Retrieve disputes</button></p>
+  <p><button type="button">Delete student account</button></p>
+  <p><button type="button">Open report list</button></p>
+  <p><button type="button">Explore books</button></p>
+  <button id="logout-button" type="button">Logout</button>
+  <script>
+    async function loadAdmin() {
+      const response = await fetch('/api/me');
+      if (!response.ok) {
+        window.location.assign('/admin-login');
+        return;
+      }
+
+      const account = await response.json();
+      if (account.role !== 'ADMIN') {
+        window.location.assign(account.role === 'STUDENT' ? '/student-home' : '/admin-login');
+        return;
+      }
+
+      document.getElementById('welcome').textContent =
+        `Welcome, ${account.firstName} ${account.lastName}`;
+    }
+
+    document.getElementById('logout-button').addEventListener('click', async () => {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.assign('/');
+    });
+
+    loadAdmin();
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Home</title>
+</head>
+<body>
+  <h1>Student Home</h1>
+  <p id="welcome">Loading account...</p>
+  <p><button type="button">Open account profile</button></p>
+  <p><button type="button">Explore books</button></p>
+  <p><button type="button">Sell a book</button></p>
+  <p><button type="button">See transactions</button></p>
+  <button id="logout-button" type="button">Logout</button>
+  <script>
+    async function loadStudent() {
+      const response = await fetch('/api/me');
+      if (!response.ok) {
+        window.location.assign('/student-login');
+        return;
+      }
+
+      const account = await response.json();
+      if (account.role !== 'STUDENT') {
+        window.location.assign(account.role === 'ADMIN' ? '/admin-home' : '/student-login');
+        return;
+      }
+
+      document.getElementById('welcome').textContent =
+        `Welcome, ${account.firstName} ${account.lastName}`;
+    }
+
+    document.getElementById('logout-button').addEventListener('click', async () => {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.assign('/');
+    });
+
+    loadStudent();
+  </script>
+</body>
+</html>

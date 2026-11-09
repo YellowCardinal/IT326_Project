@@ -8,6 +8,13 @@ public class Student extends User {
     private String isuEmail;
     private Boolean isBanned;
 
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
+    public String getIsuEmail() { return isuEmail; }
+    public void setIsuEmail(String isuEmail) { this.isuEmail = isuEmail; }
+    public Boolean getIsBanned() { return isBanned; }
+    public void setIsBanned(Boolean isBanned) { this.isBanned = isBanned; }
+
     public boolean placeBookOnSale(Book book) {
         return false;
     }

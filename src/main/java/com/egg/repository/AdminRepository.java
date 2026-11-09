@@ -12,6 +12,8 @@ public interface AdminRepository {
 
     Optional<Admin> findById(String id);
 
+    Optional<Admin> findByEmail(String email);
+
     List<Admin> findAll();
 
     void deleteById(String id);

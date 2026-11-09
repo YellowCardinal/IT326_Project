@@ -11,7 +11,11 @@ public interface StudentRepository {
 
     Optional<Student> findById(String id);
 
+    Optional<Student> findByEmail(String email);
+
     List<Student> findAll();
 
-    void deleteById(String id);
+    long deleteById(String id);
+
+    long deleteByEmail(String email);
 }

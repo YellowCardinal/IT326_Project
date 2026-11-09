@@ -31,6 +31,13 @@ public class MongoAdminRepository implements AdminRepository {
     }
 
     @Override
+    public Optional<Admin> findByEmail(String email) {
+        return mongoTemplate.query(Admin.class)
+                .matching(Query.query(where("email").is(email)))
+                .one();
+    }
+
+    @Override
     public List<Admin> findAll() {
         return mongoTemplate.findAll(Admin.class);
     }
