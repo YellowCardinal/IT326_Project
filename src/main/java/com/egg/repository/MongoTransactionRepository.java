@@ -27,9 +27,7 @@ public class MongoTransactionRepository implements TransactionRepository {
 
     @Override
     public Optional<Transaction> findById(String id) {
-        return Optional.ofNullable(
-            mongoTemplate.findById(id, Transaction.class)
-        );
+        return Optional.ofNullable(mongoTemplate.findById(id, Transaction.class));
     }
 
     @Override
@@ -39,9 +37,6 @@ public class MongoTransactionRepository implements TransactionRepository {
 
     @Override
     public void deleteById(String id) {
-        mongoTemplate.remove(
-            new Query(where("_id").is(id)),
-            Transaction.class
-        );
+        mongoTemplate.remove(new Query(where("_id").is(id)), Transaction.class);
     }
 }
