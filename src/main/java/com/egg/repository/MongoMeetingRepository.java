@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 /** MongoTemplate-backed implementation of {@link MeetingRepository} */
@@ -15,7 +16,7 @@ public class MongoMeetingRepository implements  MeetingRepository{
     
     private final MongoTemplate mongoTemplate;
 
-    public MongoMeetingRepository(MongoTemplate mongoTemplate){
+    public MongoMeetingRepository(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
